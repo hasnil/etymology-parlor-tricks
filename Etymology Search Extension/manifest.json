@@ -2,15 +2,20 @@
     "manifest_version" : 3,
     "name" : "Etymology Search",
     "description" : "Right click highlighted word to view etymology.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "background" : {
         "service_worker" : "background.js"
     },
     "permissions" : [
-        "contextMenus"
+        "contextMenus",
+        "storage"
     ],
     "icons" : {
         "48" : "scroll-48.png",
         "128" : "scroll-128.png"
+    },
+    "options_ui": {
+        "page": "options.html",
+        "open_in_tab": false
     }
 }
