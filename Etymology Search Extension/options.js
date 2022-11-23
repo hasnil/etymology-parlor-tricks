@@ -1,10 +1,12 @@
+import { loadSources } from "./options-load-sources.js";
+
 function save_options() {
   var title = document.getElementById("title").value;
   var url = document.getElementById("url").value;
 
   if (title && url) {
     chrome.storage.sync.get(["etymologyWebsiteBaseURLs"], (result) => {
-      baseURLs = result.etymologyWebsiteBaseURLs;
+      var baseURLs = result.etymologyWebsiteBaseURLs;
       baseURLs[title] = url;
 
       chrome.contextMenus.removeAll(); // To avoid duplicate error
@@ -25,6 +27,13 @@ function save_options() {
           status.textContent = "";
         }, 1000);
       });
+    });
+    let sourceNode = document.getElementById("current-sources");
+    sourceNode.removeChild(sourceNode.lastChild);
+
+    chrome.storage.sync.get(["etymologyWebsiteBaseURLs"], (result) => {
+      result.etymologyWebsiteBaseURLs[title] = url;
+      loadSources(result);
     });
   }
 }
