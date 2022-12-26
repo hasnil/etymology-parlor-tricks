@@ -23,9 +23,7 @@ function save_options() {
       chrome.storage.sync.set({ etymologyWebsiteBaseURLs: baseURLs }, () => {
         var status = document.getElementById("status");
         status.textContent = "Source saved.";
-        setTimeout(function () {
-          status.textContent = "";
-        }, 1000);
+        setTimeout(function () {status.textContent = "";}, 1000);
       });
     });
     let sourceNode = document.getElementById("current-sources");

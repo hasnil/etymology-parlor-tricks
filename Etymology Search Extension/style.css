@@ -1,0 +1,18 @@
+.center {
+    text-align:center;
+}
+
+.center-link {
+    text-align:center; 
+    margin-top: 5%;
+}
+
+.return-text {
+    text-decoration:none; 
+    color:black;
+}
+
+.return-arrow {
+    width:1em; 
+    transform: translateY(10%);
+}

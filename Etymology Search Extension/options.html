@@ -2,17 +2,17 @@
 <html>
 <head>
     <title>Etymology Search Extension Options</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
     <p><span id="current-sources">Current Sources:</span></p>
     <script type = "module" src="options-load-sources.js"></script>
     
-    <p style="text-align:center"><b>Add source website:</b></p>
+    <p class="center"><b>Add source website:</b></p>
 
 
-    <form style="text-align:center">
+    <form class="center">
         <label for="title">Context Menu Title:</label><br>
         <input type="text" id="title" name="Menu Title"><br>
         <label for="url">Base URL:</label><br>
@@ -21,9 +21,11 @@
     
     <br>
 
-    <div id="status" style="text-align:center"></div>
-    <p style="text-align:center"><button id="save">Save</button></p>
+    <div id="status" class="center"></div>
+    <p class="center"><button id="save">Save</button></p>
     <script type = "module" src="options.js"></script>
+
+    <p class="center-link"><span id="history-link"><a href="search-history.html">View Search History</a></span></p>
 
 </body>
 </html>
