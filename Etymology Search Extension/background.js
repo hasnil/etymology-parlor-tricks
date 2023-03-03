@@ -6,42 +6,48 @@ var baseURLs = {
 
 let db = null;
 
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.sync.set({ etymologyWebsiteBaseURLs: baseURLs });
+chrome.runtime.onInstalled.addListener((details) => {
 
-  for (let key of Object.keys(baseURLs)) {
-    chrome.contextMenus.create({
-      id: key,
-      title: key,
-      type: "normal",
-      contexts: ["selection"],
-    });
-  }
+  if(details.reason === "install"){
 
-  if (!(indexedDB)) {
-    console.error("This browser does not support IndexedDB.");
-    return;
-  }
+    chrome.storage.sync.set({ etymologyWebsiteBaseURLs: baseURLs });
 
-  const openRequest = indexedDB.open('EtymologySearchExtensionDB', 1);
-  
-  openRequest.onupgradeneeded = (event) => {
-    db = event.target.result;
-    let objectStore = db.createObjectStore('history', { keyPath: 'id', autoIncrement: true});
-
-    objectStore.transaction.oncomplete = () => {
-      //console.log("ObjectStore created.");
+    for (let key of Object.keys(baseURLs)) {
+      chrome.contextMenus.create({
+        id: key,
+        title: key,
+        type: "normal",
+        contexts: ["selection"],
+      });
     }
-  }
-  
-  openRequest.onsuccess = (event) => {
-    db = event.target.result;
-    //console.log("Database opened.");
 
-    db.onerror = function (event) {
-        console.error("Failed to open database.")
+    if (!(indexedDB)) {
+      console.error("This browser does not support IndexedDB.");
+      return;
     }
+
+    const openRequest = indexedDB.open('EtymologySearchExtensionDB', 1);
+    
+    openRequest.onupgradeneeded = (event) => {
+      db = event.target.result;
+      let objectStore = db.createObjectStore('history', { keyPath: 'id', autoIncrement: true});
+
+      objectStore.transaction.oncomplete = () => {
+        //console.log("ObjectStore created.");
+      }
+    }
+    
+    openRequest.onsuccess = (event) => {
+      db = event.target.result;
+      //console.log("Database opened.");
+
+      db.onerror = function (event) {
+          console.error("Failed to open database.")
+      }
+    }
+
   }
+
 });
 
 
